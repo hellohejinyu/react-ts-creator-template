@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge')
 const webpack = require('webpack')
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const baseConfig = require('./webpack.config.base')
 
@@ -10,7 +11,7 @@ const devConfig = {
   },
   devtool: 'source-map',
   entry: ['webpack-hot-middleware/client', baseConfig.entry],
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new ReactRefreshPlugin(), new webpack.HotModuleReplacementPlugin()],
 }
 
 const config = merge(baseConfig, devConfig)

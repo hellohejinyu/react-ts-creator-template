@@ -1,7 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const webpack = require('webpack')
+
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index'),
@@ -11,7 +12,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.json'],
     alias: {
-      'react-dom': '@hot-loader/react-dom',
       '@': path.resolve(__dirname, './src'),
     },
   },
@@ -23,7 +23,17 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        include: path.join(__dirname, 'src'),
+        use: [
+          isDevelopment && {
+            loader: 'babel-loader',
+            options: { plugins: ['react-refresh/babel'] },
+          },
+          {
+            loader: 'ts-loader',
+            options: { transpileOnly: true },
+          },
+        ].filter(Boolean),
       },
       {
         test: /\.css$/,
@@ -59,6 +69,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Untitled',
       template: './index.html',
+      env: process.env.NODE_ENV,
     }),
   ],
 }
