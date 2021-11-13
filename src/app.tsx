@@ -1,6 +1,6 @@
 import '@/styles/index.css'
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import s from './home.scss'
 import reactLogo from '@/assets/img/react.svg'
 
@@ -17,9 +17,9 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" render={() => <Home title="Hello React." />} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home title="Hello React." />} />
+        </Routes>
       </BrowserRouter>
     )
   }
