@@ -1,8 +1,7 @@
-import '@/styles/index.css'
-import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import s from './home.scss'
+import '@/styles/index.css'
 import reactLogo from '@/assets/img/react.svg'
+import s from './home.scss'
 
 function Home(props: { title: string }) {
   return (
@@ -13,16 +12,14 @@ function Home(props: { title: string }) {
   )
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home title="Hello React." />} />
-        </Routes>
-      </BrowserRouter>
-    )
-  }
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home title="Hello React." />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App
